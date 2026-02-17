@@ -30,9 +30,9 @@ jobs:
           mkdir -p build 
           cd build 
           cmake .. 
-        continue-on-error:true
+        continue-on-error: true
       - name: cmake compile
         run: |
           cd build 
           make
-        continue-on-error:true
+        continue-on-error: true
