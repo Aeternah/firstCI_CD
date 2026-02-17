@@ -1,0 +1,38 @@
+name: Dev Pipeline
+
+on:
+  push:
+    branches: [dev]
+  
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download some code
+        uses: actions/checkout@v4
+
+      - name: Check files
+        run: |
+          echo "Вот какие файлы здесь)"
+          ls -la   
+      - name: компилятор и cmake
+        run: |
+          sudo apt-get upgrade \
+          sudo apt-get install -y \
+            cmake \
+            make \
+          cmake --version | head -1
+      - name: cmake build
+        run: |
+          mkdir -p build 
+          cd build 
+          cmake .. 
+        continue-on-error: true
+      - name: cmake compile
+        run: |
+          cd build 
+          make
+        continue-on-error: true
